@@ -44,11 +44,12 @@
   document.addEventListener("DOMContentLoaded", function() {
     var btn = document.getElementById("search-btn");
     if (btn) {
-      btn.addEventListener("click", function() {
+      btn.addEventListener("click", function(event) {
         gtag('event', 'click_search', {
           'event_category': 'interacción',
           'event_label': 'Buscar coches'
         });
+        event.preventDefault(); // Solo para test, así aseguras que el evento llega
       });
     }
   });
