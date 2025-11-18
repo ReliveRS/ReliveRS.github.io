@@ -40,6 +40,20 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var btn = document.getElementById("search-btn");
+    if (btn) {
+      btn.addEventListener("click", function() {
+        gtag('event', 'click_search', {
+          'event_category': 'interacción',
+          'event_label': 'Buscar coches'
+        });
+      });
+    }
+  });
+</script>
+
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
@@ -154,7 +168,7 @@
                 </select>
             </div>
             <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
+                <button id="search-btn" class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
             </div>
         </div>
     </div>
