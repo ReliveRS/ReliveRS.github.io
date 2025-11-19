@@ -36,6 +36,19 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        var btn = document.getElementById("btn-submit");
+        if(btn){
+            btn.addEventListener("click", function(){
+                gtag('event', 'click_submit',{
+                    'event_category': 'interaccion',
+                    'event_label': 'Buscar Viajes'
+                });
+            });
+        }
+    });
+</script>
 
 <body>
     <!-- Topbar Start -->
@@ -169,7 +182,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
+                        <button id="btn-submit" class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
                     </div>
                 </div>
             </div>
