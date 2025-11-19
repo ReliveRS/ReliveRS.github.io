@@ -1,6 +1,6 @@
-  =>  Template Name    : ROYAL CARS - Car Rental HTML Template
+  =>  Template Name    : TRAVELER - Free Travel Website Template
 
-  =>  Template Link    : https://htmlcodex.com/car-rental-html-template
+  =>  Template Link    : https://htmlcodex.com/free-travel-website-template
 
   =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
 

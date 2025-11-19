@@ -17,15 +17,6 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-
-
-    // Date and time picker
-    $('.date').datetimepicker({
-        format: 'L'
-    });
-    $('.time').datetimepicker({
-        format: 'LT'
-    });
     
     
     // Back to top button
@@ -42,33 +33,12 @@
     });
 
 
-    // Team carousel
-    $(".team-carousel, .related-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1000,
-        center: true,
-        margin: 30,
-        dots: false,
-        loop: true,
-        nav : true,
-        navText : [
-            '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-            '<i class="fa fa-angle-right" aria-hidden="true"></i>'
-        ],
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:3
-            }
-        }
+    // Date and time picker
+    $('.date').datetimepicker({
+        format: 'L'
+    });
+    $('.time').datetimepicker({
+        format: 'LT'
     });
 
 
@@ -92,35 +62,6 @@
             },
             992:{
                 items:3
-            }
-        }
-    });
-
-
-    // Vendor carousel
-    $('.vendor-carousel').owlCarousel({
-        loop: true,
-        margin: 30,
-        dots: true,
-        loop: true,
-        center: true,
-        autoplay: true,
-        smartSpeed: 1000,
-        responsive: {
-            0:{
-                items:2
-            },
-            576:{
-                items:3
-            },
-            768:{
-                items:4
-            },
-            992:{
-                items:5
-            },
-            1200:{
-                items:6
             }
         }
     });
