@@ -1,0 +1,247 @@
+/* ==========================================================================
+   RECRUITER.CSS
+   Estilos del modo reclutador (overlay a pantalla completa).
+   Incluye cabecera, resumen, highlights, stack, acciones y footer.
+   Los keyframes de entrada están en animations.css.
+   Los hovers y responsive se gestionan en responsive.css.
+   ========================================================================== */
+
+.recruiter-mode {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    overflow-y: auto;
+    color: #e7edf5;
+    background:
+        radial-gradient(circle at 82% 14%, rgba(57, 212, 255, 0.16), transparent 28rem),
+        radial-gradient(circle at 12% 88%, rgba(139, 92, 246, 0.1), transparent 26rem),
+        #07111f;
+    animation: recruiter-mode-in 0.35s ease-out both;
+}
+
+/* Rejilla decorativa de fondo, no interactiva */
+.recruiter-mode-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+    background-image:
+        linear-gradient(rgba(57, 212, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 212, 255, 0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+}
+
+/* Contenedor principal del contenido */
+.recruiter-mode-content {
+    position: relative;
+    z-index: 2;
+    width: min(980px, calc(100% - 120px));
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 96px 0 48px;
+}
+
+/* Botón de cierre fijo */
+.recruiter-mode-close {
+    position: fixed;
+    z-index: 1210;
+    top: 24px;
+    right: 28px;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    padding: 0;
+    color: #e7edf5;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    border: 1px solid rgba(148, 180, 210, 0.32);
+    border-radius: 8px;
+    background: rgba(4, 16, 29, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+/* Cabecera principal */
+.recruiter-mode-header {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    padding-bottom: 38px;
+    border-bottom: 1px solid rgba(148, 180, 210, 0.2);
+}
+
+.recruiter-mode-kicker,
+.recruiter-mode-time,
+.recruiter-mode-section-label {
+    margin: 0;
+    color: #39d4ff;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.recruiter-mode-time {
+    display: inline-flex;
+    margin-top: 16px;
+    padding: 7px 10px;
+    color: #bcefff;
+    border: 1px solid rgba(57, 212, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(57, 212, 255, 0.08);
+}
+
+.recruiter-mode-header h2 {
+    margin: 20px 0 10px;
+    color: #ffffff;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.07em;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.55);
+}
+
+.recruiter-mode-role {
+    margin: 0;
+    color: #8ee8ff;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(0.78rem, 1.4vw, 0.95rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.recruiter-mode-summary {
+    max-width: 700px;
+    margin: 22px 0 0;
+    color: rgba(231, 237, 245, 0.88);
+    font-size: clamp(1rem, 2vw, 1.14rem);
+    line-height: 1.75;
+}
+
+/* Highlights principales */
+.recruiter-mode-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.recruiter-highlight {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    min-height: 180px;
+    padding: 22px;
+    border: 1px solid rgba(148, 180, 210, 0.2);
+    border-radius: 12px;
+    background: rgba(10, 27, 45, 0.74);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+    transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.recruiter-highlight>span {
+    color: #39d4ff;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.recruiter-highlight h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.08rem;
+    letter-spacing: -0.025em;
+}
+
+.recruiter-highlight p {
+    margin: 12px 0 0;
+    color: #a6b3c5;
+    font-size: 0.93rem;
+    line-height: 1.65;
+}
+
+/* Stack tecnológico */
+.recruiter-mode-stack {
+    margin-top: 30px;
+    padding: 24px;
+    border: 1px solid rgba(148, 180, 210, 0.18);
+    border-radius: 12px;
+    background: rgba(4, 16, 29, 0.54);
+}
+
+.recruiter-mode-stack>div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 16px;
+}
+
+.recruiter-mode-stack span {
+    padding: 7px 11px;
+    color: #bcefff;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border: 1px solid rgba(57, 212, 255, 0.22);
+    border-radius: 5px;
+    background: rgba(57, 212, 255, 0.07);
+}
+
+/* Acciones rápidas */
+.recruiter-mode-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.recruiter-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 17px;
+    color: #e7edf5;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid rgba(148, 180, 210, 0.3);
+    border-radius: 6px;
+    background: rgba(4, 16, 29, 0.72);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.recruiter-action-primary {
+    color: #041019;
+    border-color: #39d4ff;
+    background: #39d4ff;
+}
+
+/* Footer del Recruiter Mode */
+.recruiter-mode-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 46px;
+    padding: 22px 0 10px;
+    color: #a6b3c5;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border-top: 1px solid rgba(148, 180, 210, 0.2);
+}
+
+.recruiter-mode-footer button {
+    padding: 0;
+    color: #39d4ff;
+    font: inherit;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+}

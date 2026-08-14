@@ -1,0 +1,497 @@
+/* ==========================================================================
+   UNIVERSE.CSS
+   Estilos de las vistas inmersivas y elementos flotantes:
+   universos 3D, planetas, inspectores, controles, Galaxy Navigator
+   y la transición warp entre galaxias.
+   Los hovers y reglas responsive se gestionan en responsive.css.
+   ========================================================================== */
+
+/* -------------------- CONTENEDOR UNIVERSO -------------------- */
+
+.universe-mode {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(20, 93, 128, 0.18), transparent 32rem),
+        #020812;
+    overflow: hidden;
+}
+
+.universe-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.universe-canvas canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* -------------------- HEADER DE UNIVERSO -------------------- */
+
+.universe-header {
+    position: absolute;
+    z-index: 2;
+    top: 34px;
+    left: 38px;
+    pointer-events: none;
+}
+
+.universe-kicker {
+    margin: 0 0 10px;
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.universe-header h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.06em;
+}
+
+.universe-header>p:last-child {
+    max-width: 350px;
+    margin: 12px 0 0;
+    color: var(--text-soft);
+    line-height: 1.6;
+}
+
+/* -------------------- BOTÓN CERRAR UNIVERSO -------------------- */
+
+.universe-close-button {
+    position: absolute;
+    z-index: 3;
+    top: 34px;
+    right: 38px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid rgba(148, 180, 210, 0.3);
+    border-radius: 6px;
+    background: rgba(4, 16, 29, 0.76);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+/* -------------------- AYUDA FLOTANTE -------------------- */
+
+.universe-help {
+    position: absolute;
+    z-index: 2;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 9px 13px;
+    color: rgba(231, 237, 245, 0.74);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+    border: 1px solid rgba(148, 180, 210, 0.16);
+    border-radius: 6px;
+    background: rgba(4, 16, 29, 0.68);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: none;
+}
+
+/* -------------------- INSPECTOR DE PLANETAS -------------------- */
+
+.planet-inspector {
+    position: absolute;
+    z-index: 3;
+    right: 38px;
+    bottom: 36px;
+    width: min(390px, calc(100% - 76px));
+    padding: 24px 44px 24px 24px;
+    border: 1px solid rgba(57, 212, 255, 0.38);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(57, 212, 255, 0.16), transparent 15rem),
+        rgba(4, 16, 29, 0.95);
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.52),
+        0 0 20px rgba(57, 212, 255, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(16px);
+    will-change: transform, opacity;
+    transition:
+        opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.18s linear;
+}
+
+.planet-inspector.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.planet-inspector-label {
+    margin: 0;
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.planet-inspector h3 {
+    margin: 12px 0 10px;
+    font-size: clamp(1.45rem, 3vw, 1.95rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+}
+
+.planet-inspector>p:not(.planet-inspector-label) {
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 0.94rem;
+    line-height: 1.68;
+}
+
+.planet-inspector-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    padding: 0;
+    color: var(--text-soft);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    border: 1px solid rgba(148, 180, 210, 0.2);
+    border-radius: 6px;
+    background: rgba(4, 16, 29, 0.6);
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.planet-navigate-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    margin-top: 20px;
+    padding: 0 16px;
+    color: #041019;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    border: 1px solid var(--cyan);
+    border-radius: 6px;
+    background: var(--cyan);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+/* -------------------- ETIQUETAS FLOTANTES -------------------- */
+
+.universe-planet-label {
+    display: inline-block;
+    padding: 5px 8px;
+    color: rgba(231, 237, 245, 0.9);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    border: 1px solid rgba(148, 180, 210, 0.22);
+    border-radius: 4px;
+    background: rgba(4, 16, 29, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.universe-planet-label small {
+    display: block;
+    margin-bottom: 3px;
+    color: rgba(142, 232, 255, 0.78);
+    font-size: 0.52rem;
+    letter-spacing: 0.08em;
+}
+
+.universe-planet-label.is-selected {
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 0 20px rgba(57, 212, 255, 0.35);
+}
+
+.universe-core-label {
+    display: inline-block;
+    padding: 6px 10px;
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    border: 1px solid rgba(57, 212, 255, 0.24);
+    border-radius: 4px;
+    background: rgba(4, 16, 29, 0.72);
+}
+
+/* -------------------- CONTROLES DE REPRODUCCIÓN -------------------- */
+
+.universe-controls {
+    position: absolute;
+    z-index: 3;
+    top: 92px;
+    right: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.universe-controls .universe-play-button {
+    position: static;
+    min-width: 190px;
+}
+
+.universe-play-button {
+    position: absolute;
+    z-index: 3;
+    top: 92px;
+    right: 38px;
+    min-height: 40px;
+    padding: 0 13px;
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.66rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid rgba(57, 212, 255, 0.42);
+    border-radius: 6px;
+    background: rgba(4, 16, 29, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* -------------------- SOFT SKILLS GALAXY -------------------- */
+
+.soft-skills-universe {
+    background:
+        radial-gradient(circle at 52% 47%, rgba(182, 50, 116, 0.22), transparent 34rem),
+        radial-gradient(circle at 10% 85%, rgba(255, 209, 102, 0.11), transparent 28rem),
+        #120611;
+}
+
+.soft-skills-header .universe-kicker {
+    color: #ff9fc9;
+}
+
+.soft-skills-inspector {
+    border-color: rgba(255, 126, 182, 0.45);
+    background:
+        radial-gradient(circle at 100% 0%, rgba(255, 126, 182, 0.2), rgba(255, 209, 102, 0.08) 45%, transparent 15rem),
+        rgba(24, 6, 22, 0.9);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.52), 0 0 22px rgba(255, 126, 182, 0.15);
+}
+
+.soft-skills-inspector .planet-inspector-label {
+    color: #ff9fc9;
+}
+
+.soft-core-label {
+    color: #ffd6e9;
+    border-color: rgba(255, 159, 201, 0.3);
+}
+
+.soft-skills-universe .universe-planet-label small {
+    color: rgba(255, 201, 224, 0.84);
+}
+
+/* -------------------- FOUNDATION GALAXY -------------------- */
+
+.foundations-universe {
+    background:
+        radial-gradient(circle at 50% 45%, rgba(139, 92, 246, 0.18), transparent 32rem),
+        radial-gradient(circle at 85% 15%, rgba(76, 201, 240, 0.1), transparent 22rem),
+        radial-gradient(circle at 15% 80%, rgba(251, 191, 36, 0.06), transparent 20rem),
+        #040b16;
+}
+
+.foundations-header .universe-kicker {
+    color: #b8f4ff;
+}
+
+.foundations-universe .universe-planet-label small {
+    color: #c4b5fd;
+}
+
+.foundation-core-label {
+    color: #fde68a;
+    border-color: rgba(251, 191, 36, 0.3);
+    background: rgba(6, 16, 32, 0.8);
+}
+
+.foundations-inspector {
+    border-color: rgba(139, 92, 246, 0.48);
+    background:
+        radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.22), rgba(76, 201, 240, 0.08) 45%, transparent 15rem),
+        rgba(6, 16, 32, 0.9);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.52), 0 0 22px rgba(139, 92, 246, 0.16);
+}
+
+.foundations-inspector .planet-inspector-label {
+    color: #b8f4ff;
+}
+
+/* -------------------- GALAXY NAVIGATOR -------------------- */
+
+.galaxy-navigator {
+    position: fixed;
+    top: auto;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px 12px;
+    background: rgba(5, 10, 24, 0.72);
+    border: 1px solid rgba(142, 232, 255, 0.22);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 24px rgba(57, 212, 255, 0.12);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.galaxy-navigator-label {
+    margin: 0;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    color: rgba(142, 232, 255, 0.65);
+}
+
+.galaxy-navigator-links {
+    display: flex;
+    gap: 10px;
+}
+
+.galaxy-navigator-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 16px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: #9fb3c8;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.galaxy-navigator-button:disabled {
+    cursor: default;
+}
+
+.galaxy-navigator-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4a5a6a;
+    transition: all 0.25s ease;
+}
+
+.galaxy-navigator-button.is-active {
+    color: #06121f;
+    background: linear-gradient(135deg, #39d4ff, #8ee8ff);
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(57, 212, 255, 0.45);
+}
+
+.galaxy-navigator-button.is-active .galaxy-navigator-dot {
+    background: #06121f;
+}
+
+/* -------------------- GALAXY WARP TRANSITION -------------------- */
+
+.galaxy-warp {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    pointer-events: none;
+    background: #020812;
+    animation: galaxy-warp-background 1.05s ease-in-out both;
+}
+
+.galaxy-warp-soft {
+    background:
+        radial-gradient(circle at center, rgba(255, 126, 182, 0.34), rgba(17, 5, 18, 0.96) 48%, #020812 100%);
+}
+
+.galaxy-warp-tech {
+    background:
+        radial-gradient(circle at center, rgba(57, 212, 255, 0.3), rgba(2, 8, 18, 0.96) 48%, #020812 100%);
+}
+
+.galaxy-warp-foundation {
+    background:
+        radial-gradient(circle at center, rgba(251, 191, 36, 0.32), rgba(18, 12, 2, 0.96) 48%, #020812 100%);
+}
+
+.galaxy-warp-stars {
+    position: absolute;
+    inset: -35%;
+    opacity: 0;
+    background-image:
+        repeating-radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0 1px, transparent 2px 17px);
+    transform: scale(0.15);
+    animation: galaxy-warp-stars 1.05s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
+.galaxy-warp-core {
+    width: 8px;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow:
+        0 0 24px 12px rgba(255, 255, 255, 0.9),
+        0 0 100px 48px rgba(142, 232, 255, 0.55),
+        0 0 220px 95px rgba(255, 126, 182, 0.28);
+    animation: galaxy-warp-core 1.05s ease-in-out both;
+}
+
+.galaxy-warp p {
+    position: absolute;
+    bottom: 16%;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(0.62rem, 1.3vw, 0.82rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-align: center;
+    animation: galaxy-warp-text 1.05s ease-in-out both;
+}

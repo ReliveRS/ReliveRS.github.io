@@ -1,0 +1,42 @@
+/* ==========================================================================
+   BASE.CSS
+   Estilos globales, variables de color y fondo principal de la web.
+   Este archivo se importa primero para que todas las variables y reglas
+   generales estén disponibles para el resto de estilos.
+   ========================================================================== */
+
+/* Variables globales usadas en toda la aplicación.
+   Se mantienen aquí para centralizar colores y fondos. */
+:root {
+    --background: #07111f;
+    --background-soft: #0d1b2d;
+    --panel: rgba(16, 31, 50, 0.72);
+    --text: #e7edf5;
+    --text-soft: #a6b3c5;
+    --cyan: #39d4ff;
+    --cyan-soft: rgba(57, 212, 255, 0.13);
+    --border: rgba(148, 180, 210, 0.2);
+}
+
+/* Foco visible para navegación con teclado, claro y consistente. */
+:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+    box-shadow: 0 0 12px rgba(57, 212, 255, 0.4);
+}
+
+/* Fondo principal de la aplicación.
+   Se aplica a <main> para no interferir con capas fijas como modales y universos. */
+main {
+    min-height: 100vh;
+    overflow-x: clip;
+    /* Evita desbordamiento horizontal en móvil sin romper sticky */
+    color: var(--text);
+    background:
+        linear-gradient(rgba(57, 212, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 212, 255, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 75% 15%, rgba(0, 168, 255, 0.18), transparent 27rem),
+        radial-gradient(circle at 15% 75%, rgba(34, 197, 176, 0.1), transparent 23rem),
+        var(--background);
+    background-size: 42px 42px, 42px 42px, auto, auto, auto;
+}
