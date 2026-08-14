@@ -120,7 +120,8 @@ function App() {
 
       <section id="inicio" className="hero-section">
         <div className="hero-intro">
-          <p className="status">● DESARROLLO DE SOFTWARE · SISTEMAS · CIBERSEGURIDAD</p>
+          <p className="status">DESARROLLO DE SOFTWARE · SISTEMAS · CIBERSEGURIDAD</p>
+
 
 
           <h1>
